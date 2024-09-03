@@ -16,3 +16,15 @@ body {
     margin: 20px auto;
     display: block;
 }
+
+#file-input {
+    display: none;
+}
+
+#canvas {
+    display: none;
+}
+
+#download-btn {
+    display: none;
+}
