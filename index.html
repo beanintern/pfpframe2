@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
-    <title>Profile Picture Framer</title>
+    <title>Profile Pictur1e Framer</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        console.log('Inline script executed');
-    </script>
 </head>
 <body>
     <h1>Profile Picture Framer</h1>
@@ -16,13 +13,20 @@
         <p>Drag and drop a profile picture here or click to upload</p>
         <input type="file" id="file-input" accept="image/*">
     </div>
-    <canvas id="canvas"></canvas>
-    <img id="framed-image" alt="Framed Profile Picture">
+    
+    <div>
+        <h2>Framed Image</h2>
+        <img id="framed-image" alt="Framed Profile Picture" style="border: 2px solid red;">
+    </div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
     <button id="download-btn">Download Framed Picture</button>
+    
+    <div>
+        <h2>Debug: Border Image</h2>
+        <img id="debug-border-image" src="border.png" alt="Border Image">
+    </div>
 
     <script src="script.js"></script>
-    <script>
-        console.log('Body script executed');
-    </script>
 </body>
 </html>
