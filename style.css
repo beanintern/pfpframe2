@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#drop-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+#framed-image {
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+}
