@@ -3,6 +3,7 @@ console.log('Script execution started');
 const dropArea = document.getElementById('drop-area');
 const fileInput = document.getElementById('file-input');
 const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 const framedImage = document.getElementById('framed-image');
 const downloadBtn = document.getElementById('download-btn');
 const borderImage = new Image();
@@ -13,6 +14,8 @@ borderImage.src = 'border.png';
 borderImage.onload = () => {
     console.log('Border image loaded successfully');
     console.log('Border image dimensions:', borderImage.width, 'x', borderImage.height);
+    canvas.width = borderImage.width;
+    canvas.height = borderImage.height;
 };
 
 borderImage.onerror = (e) => {
@@ -21,7 +24,28 @@ borderImage.onerror = (e) => {
 
 let profileImage;
 
-// ... other event listeners remain the same ...
+dropArea.addEventListener('click', () => fileInput.click());
+
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.style.backgroundColor = '#eee';
+});
+
+dropArea.addEventListener('dragleave', () => {
+    dropArea.style.backgroundColor = 'white';
+});
+
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.style.backgroundColor = 'white';
+    const file = e.dataTransfer.files[0];
+    processProfileImage(file);
+});
+
+fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    processProfileImage(file);
+});
 
 function processProfileImage(file) {
     console.log('Processing profile image');
@@ -41,19 +65,11 @@ function processProfileImage(file) {
 function combineImages() {
     console.log('Combining images');
     
-    // Ensure both images are loaded
     if (!borderImage.complete || !profileImage.complete) {
         console.log('Images not fully loaded yet. Border loaded:', borderImage.complete, 'Profile loaded:', profileImage.complete);
         return;
     }
     
-    canvas.width = borderImage.width;
-    canvas.height = borderImage.height;
-    console.log('Canvas dimensions set to:', canvas.width, 'x', canvas.height);
-    
-    const ctx = canvas.getContext('2d');
-    
-    // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // Draw profile image
@@ -81,4 +97,11 @@ function combineImages() {
     downloadBtn.classList.add('visible');
 }
 
-// ... rest of the code remains the same ...
+downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'framed_profile_picture.png';
+    link.href = framedImage.src;
+    link.click();
+});
+
+console.log('Script execution completed');
