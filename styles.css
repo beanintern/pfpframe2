@@ -15,10 +15,7 @@ body {
     height: auto;
     margin: 20px auto;
     display: block;
-}
-
-#file-input {
-    display: none;
+    border: 2px solid red;
 }
 
 #canvas {
@@ -27,4 +24,13 @@ body {
 
 #download-btn {
     display: none;
+}
+
+#download-btn.visible {
+    display: inline-block;
+}
+
+#debug-border-image {
+    max-width: 100%;
+    height: auto;
 }
