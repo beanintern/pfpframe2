@@ -8,6 +8,8 @@ borderImage.src = 'border.png';
 
 let profileImage;
 
+console.log('Script loaded');
+
 borderImage.onload = () => {
     console.log('Border image loaded successfully');
     console.log('Border image dimensions:', borderImage.width, 'x', borderImage.height);
