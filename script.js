@@ -20,7 +20,46 @@ borderImage.onerror = () => {
     console.error('Failed to load border image');
 };
 
-// ... rest of the code remains the same ...
+dropArea.addEventListener('click', () => {
+    fileInput.click();
+});
+
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.style.backgroundColor = '#eee';
+});
+
+dropArea.addEventListener('dragleave', () => {
+    dropArea.style.backgroundColor = 'white';
+});
+
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.style.backgroundColor = 'white';
+    const file = e.dataTransfer.files[0];
+    processProfileImage(file);
+});
+
+fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    processProfileImage(file);
+});
+
+function processProfileImage(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        profileImage = new Image();
+        profileImage.onload = () => {
+            console.log('Profile image loaded successfully');
+            console.log('Profile image dimensions:', profileImage.width, 'x', profileImage.height);
+            if (borderImage.complete) {
+                combineImages();
+            }
+        };
+        profileImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
 
 function combineImages() {
     console.log('Combining images');
@@ -34,7 +73,12 @@ function combineImages() {
     ctx.drawImage(profileImage, profileX, profileY);
     console.log('Profile image drawn on canvas');
     framedImage.src = canvas.toDataURL();
-    downloadBtn.style.display = 'block';
+    downloadBtn.style.display = 'inline-block';
 }
 
-// ... rest of the code remains the same ...
+downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'framed_profile_picture.png';
+    link.href = framedImage.src;
+    link.click();
+});
