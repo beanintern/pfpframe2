@@ -26,23 +26,6 @@ let profileImage;
 
 // ... other event listeners remain the same ...
 
-function processProfileImage(file) {
-    console.log('Processing profile image');
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        profileImage = new Image();
-        profileImage.onload = () => {
-            console.log('Profile image loaded successfully');
-            console.log('Profile image dimensions:', profileImage.width, 'x', profileImage.height);
-            if (borderImage.complete) {
-                combineImages();
-            }
-        };
-        profileImage.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-}
-
 function combineImages() {
     console.log('Combining images');
     
@@ -71,7 +54,7 @@ function combineImages() {
     
     framedImage.src = canvas.toDataURL();
     console.log('Canvas converted to data URL');
-    downloadBtn.style.display = 'inline-block';
+    downloadBtn.classList.add('visible');
 }
 
 // ... rest of the code remains the same ...
