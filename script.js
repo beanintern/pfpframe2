@@ -1,5 +1,8 @@
 console.log('Script execution started');
+alert('Script is running');
+console.log('Script execution started');
 
+// ... rest of the script remains the same ...
 try {
     const dropArea = document.getElementById('drop-area');
     const fileInput = document.getElementById('file-input');
