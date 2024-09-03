@@ -19,7 +19,11 @@ body {
 }
 
 #canvas {
-    display: none;
+    border: 1px solid blue;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    display: block;
 }
 
 #download-btn {
